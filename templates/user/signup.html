@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %} {% load widget_tweaks %} {% load static %} {% block title %} SignUp {% endblock title %} {% block content %}
+<div class="container">
+  <p class="h1 text-center" id="login-title"><i class="fa-solid fa-user-plus" style="color: #000000;"></i> SignUp</p>
+  <form action="" method="post" class="form-padding" id="signup-form">
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="First Name" class=""> First Name:</label>
+        {% csrf_token %} {% render_field form.first_name class="form-control form-control-sm form-field" placeholder="Enter first name" %}
+      </div>
+      <div class="col-md-6">
+        <label for="First Name"> Last Name:</label>
+        {% csrf_token %} {% render_field form.last_name class="form-control form-control-sm form-field" placeholder="Enter last name" %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="First Name"> Email:</label>
+        {% csrf_token %} {% render_field form.email class="form-control form-control-sm form-field" placeholder="email@email.com" %}
+      </div>
+      <div class="col-md-6">
+        <label for="First Name"> Number:</label>
+        {% csrf_token %} {% render_field form.number class="form-control form-control-sm form-field" placeholder="eg. 98xxxxxxxx" %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="First Name"> Password:</label>
+        {% csrf_token %} {% render_field form.password1 class="form-control form-control-sm form-field" placeholder="Enter password" %}
+      </div>
+      <div class="col-md-6">
+        <label for="First Name"> Confirm Password:</label>
+        {% csrf_token %} {% render_field form.password2 class="form-control form-control-sm form-field" placeholder="Confirm password" %}
+      </div>
+    </div>
+    <div>
+      {% if bool %} {% csrf_token %} {% render_field form.is_owner checked=True style="display:none" %} {% else %} {% csrf_token %} 
+      {% render_field form.is_owner style="display:none" %} {% endif %}
+    </div>
+    <div class="row mt-4">
+      <button class="form-btn " onclick="getLocation()">Create Your Account</button>
+      <div class="col-md-12 mt-3">
+        <a href="{% url 'login' %}" class="link">Already Have an Account?</a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+  

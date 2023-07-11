@@ -1,0 +1,34 @@
+<div class="rating-star">
+    {% if rating <= 1 %}
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    {% elif rating > 1 and rating <= 2 %}
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    {% elif rating > 2 and rating <= 3 %}
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+
+    {% elif rating > 3 and rating <= 4 %}
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-regular fa-circle" style="color: #124948;"></i>
+    {% else %}
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    <i class="fa-solid fa-circle" style="color: #124948;"></i>
+    {% endif %}
+</div>

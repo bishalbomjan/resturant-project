@@ -1,0 +1,64 @@
+{% load static %}
+<style>
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+    nav {
+        background-color: rgb(50, 50, 50);
+        {% comment %} color: #fff; {% endcomment %}
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+      }
+      
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      li {
+        display: inline-block;
+        margin: 0 10px;
+      }
+      
+      a {
+        {% comment %} color: #fff; {% endcomment %}
+        text-decoration: none;
+      }
+      
+      .active {
+        border-bottom: 2px solid #fff;
+      }
+      
+      form {
+        display: inline-block;
+      }
+      
+      .flex {
+        display: flex;
+      }
+      
+      .space {
+        margin: 0 10px;
+      }
+</style>
+<nav>
+    <ul>
+      <li><a href="{% url 'home' %}" class="active">Home</a></li>
+      <li><a href="">About us</a></li>
+      <li><a href="">Contact</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">LogIn</a></li>
+        <li><a href="{% url 'register' %}">Sign Up</a></li>
+      {% endif %} 
+      <li>
+        <form action="{% url 'searchbar' %}" method="GET">
+          <div class="flex space">
+            <input class="space" type="text" name="search-restaurant" id="search-rest" placeholder="Search..."/>
+            <input class="space" type="submit" value="Search" name="Search" />
+          </div>
+        </form>
+      </li>
+    </ul>
+  </nav>

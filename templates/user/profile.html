@@ -1,0 +1,133 @@
+{% extends 'base/base.html' %} {% load static %} {% load widget_tweaks %} 
+{% block title %}{{ user.first_name }} Profile {% endblock title %} 
+
+{% block content %}
+<section>
+  <div class="container pt-4">
+    <div class="row">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+      <div class="col-md-4">
+        <div class="row">
+          <h1><i class="fa-regular fa-address-card" style="color: #000000;"></i> Profile</h1>
+          {% comment %} <a
+            href="{% url 'editprofile' user.id user.first_name %}"
+            class="edit-profile-btn"
+            >Edit Profile</a
+          > {% endcomment %}
+        </div>
+        <div class="row mt-1">
+          <strong>Basic Information</strong>
+          <div class="">
+            <span class="me-4">Full Name: </span>{{ user.first_name }} {{ user.last_name }}
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <span class="me-4">Email: </span>{{ user.email }} {{ user.number }}
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <span class="me-4">Longitude: </span>{{ user_profile.longitude }} 
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <span class="me-4">Latitude: </span>{{ user_profile.latitude }} 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+          {% if is_owner %}
+          <div class="row">
+            <strong class="h1">Your Restaurant</strong>
+            <div class="col-lg-6">
+              <div class="owl-carousel owl-theme">
+                {% for image in owner.restaurant.image.all %}
+                <div class="item">
+                  <img
+                    src="{{ image.url }}"
+                    class="img-fluid img-width"
+                    alt="Restaurant image"
+                  />
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h1 class="mb-4">{{ owner.restaurant.name }}</h1>
+              <p><strong>Address:</strong> {{ owner.restaurant.location }}</p>
+              <p>
+                <strong>Cuisines:</strong>
+                {% for cuisine in cuisines %}
+                <span>{{ cuisine.name }} </span>
+                {% endfor %}
+              </p>
+              <p><strong>Average ratings:</strong> {{ owner.restaurant.average_rating }}</p>
+              <p><strong>Hours:</strong> Mon-Sat: 11am-10pm, Sun: 12pm-9pm</p>
+            </div>
+          </div>
+          
+          <span class="h1 mt-4 mb-4">Reservations in your restaurant </span>
+          <div class="row profile-reserve-table">
+            <div class="row heading">
+              <div class="col-lg-3">No.</div>
+              <div class="col-lg-3">User</div>
+              <div class="col-lg-3">Date</div>
+              <div class="col-lg-3">Number of Guest</div>
+            </div>
+          {% for reserve in reservation %}            
+          <div class="row">
+            <div class="col-lg-3">{{ forloop.counter }}</div>
+            <div class="col-lg-3">
+              <a
+                href="{% url 'detail' reserve.restaurant.slug reserve.restaurant.id %}"
+                class="link"
+                >{{ reserve.user.username }}</a
+              >
+            </div>
+            <div class="col-lg-3">{{ reserve.date }}</div>
+            <div class="col-lg-3">{{ reserve.num_guests }}</div>  
+          </div>
+          {% endfor %}
+        
+          {% else %}
+          <span class="h1"> My Reservation </span>
+          <div class="row profile-reserve-table">
+          {% for reserve in reservation %}
+          
+          
+            <div class="row heading">
+              <div class="col-lg-3">No.</div>
+              <div class="col-lg-3">Restaurant</div>
+              <div class="col-lg-3">Date</div>
+              <div class="col-lg-3">Number of Guest</div>
+            </div>
+          <div class="row">
+            <div class="col-lg-3">{{ forloop.counter }}</div>
+            <div class="col-lg-3">
+              <a
+                href="{% url 'detail' reserve.restaurant.slug reserve.restaurant.id %}"
+                class="link"
+                >{{ reserve.restaurant.name }}</a
+              >
+            </div>
+            <div class="col-lg-3">{{ reserve.date }}</div>
+            <div class="col-lg-3">{{ reserve.num_guests }}</div>
+          
+
+          {% endfor %}
+        </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

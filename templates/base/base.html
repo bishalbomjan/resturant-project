@@ -1,0 +1,266 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'photo/logo-no-background.png' %}"
+    />
+
+    {% comment %} <link
+      rel="stylesheet"
+      href="https://fontawesome.com/releases/v5.15/css/all.css"
+    />  {% endcomment %}
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+      {% block style %}{% endblock style %}
+    </style>
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {% endcomment %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/65e99367d7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+   </head>
+   {% if detail %}
+  <body class="bg-grey">
+  {% else %}
+  <body>
+    {% endif %}
+  </body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light navbarbg fixed-top nav-shadow">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'homepage' %}">
+            <span class="fw-bold h3"
+              ><img
+                src="{% static 'photo/logo-color.png' %}"
+                class="logo"
+                alt=""
+              />
+              Book Now</span
+            ></a
+          >
+          <button
+            class="navbar-toggler hamburger"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navmenu"
+          >
+            {% comment %} <i class="fa-solid fa-bars"></i> {% endcomment %}
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item active">
+                <a class="nav-link text-dark" href="{% url 'homepage' %}">
+                  <span class="linkBold"> Home </span></a
+                >
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'profile' user.id %}"
+                  ><span class="linkBold"> Profile </span></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'logout' %}"
+                  ><span class="linkBold"> Logout </span></a
+                >
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a
+                  class="nav-link text-dark"
+                  href="{% url 'login' %}"
+                  ><span class="linkBold"> Login </span></a
+                >
+              </li>
+              {% comment %} <li class="nav-item">
+                <a
+                  class="nav-link text-dark"
+                  href="{% url 'signup' 'owner_signup' %}"
+                  ><span class="linkBold"> Owner Signup </span></a
+                >
+              </li> {% endcomment %}
+              <li class="nav-item">
+                <a
+                  class="nav-link text-dark"
+                  href="{% url 'signup' 'customer_signup' %}"
+                  ><span class="linkBold"> Signup </span></a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <div class="content">
+      <div class="container mb-3">
+        <div class="row mt-5">
+          {% if messages %}
+          <div class="messages mt-4">
+            {% for message in messages %} 
+            {% if 'error' in message.tags %}
+            <div class="alert alert-danger">
+              {% endif %} 
+              {% if 'success' in message.tags %}
+              <div class="alert alert-success">{% endif %} 
+                {% if 'info' in message.tags %}
+                <div class="alert alert-info" >
+                  {% if 'error' in message.tags %}
+                  <div class="alert alert-info">{% endif %}
+                {% endif %}
+                {{ message }}
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% block content %} {% endblock content %}
+  </div>
+  <hr>
+  <footer class="bg-light text-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="text-dark">&copy; 2023 Book Now. All Rights Reserved.</p>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-inline text-md-right mb-0" >
+            <li class="list-inline-item"><a href="#" class="link">Privacy Policy</a></li>
+            <li class="list-inline-item"><a href="#" class="link">Terms of Use</a></li>
+            <li class="list-inline-item"><a href="#" class="link">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+    <script src="{% static 'js/index.js' %}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"
+      integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    
+    <script>
+      $(document).ready(function() {
+        $('#rating-submit').click(function(event) {
+          event.preventDefault(); // prevent default form submission behavior
+          console.log('CLicked')
+          $.ajax({
+            url: '{% url "rating_submit" %}',
+            type: 'post',
+            data: $('#rating-form').serialize(),
+            success: function(response) {
+              $('#form-result').html(response);
+              $('#rating-form')[0].reset(); // update the form result element
+            }
+          });
+        });
+      });
+    </script>
+    {% if bool %}
+    <script>
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        navText : ["<div class='owl-prev'>prev</div>","<div class='owl-next'>next</div>"],
+        nav:true,
+        center:true,
+        autoplay:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 1,
+          },
+          1000: {
+            items: 3,
+          },
+        },
+      });
+    </script>
+
+
+    {% else %}
+    <script>
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        navText : ["<div class='owl-prev'>prev</div>","<div class='owl-next'>next</div>"],
+        nav:true,
+        center:true,
+        autoplay:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 1,
+          },
+          1000: {
+            items: 1,
+          },
+        },
+      });
+    </script>
+    {% endif %}
+
+    {% if last_login %}
+  <script>  
+    $(document).ready(function(){
+      $('#exampleModal').modal('show');
+    });
+  </script>
+  {% endif %}
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %} {% load static %} {% load widget_tweaks%} {% block title %} Login Page {% endblock title %} {% block content %}
+<div class="container">
+    <div class="row  form-padding">
+      <div class="">
+        <p class="h1 text-center" id="login-title"><i class="fa-solid fa-right-to-bracket" style="color: #000000;"></i> Login</p>
+        <form class="login-form" method="post" id="login-form">
+          <div class="row">
+            <label for="username" class="mb-2"><i class="fa-solid fa-user" style="color: #000000;"></i> Username</label>
+            {% csrf_token %} {% render_field form.username class="form-field" placeholder="Type your username" %}
+          </div>
+          <div class="row">
+            <label for="Password" class="mb-2 mt-2"><i class="fa-solid fa-key" style="color: #000000;"></i> Password</label>
+            {% csrf_token %} {% render_field form.password class="form-field" type="password" placeholder="Type your password" %}
+            {% csrf_token %} {% render_field form.latitude class="form-field" type="number" id="latitude" style="display:none;" placeholder="Type your password" %}
+            {% csrf_token %} {% render_field form.longitude class="form-field" type="number" id="longitude" style="display:none;" placeholder="Type your password" %}
+          </div> 
+          <div class="row mt-4 mb-3">
+            <button type="submit" class="form-btn click" onclick="getLocation()" >LOGIN</button>
+          </div>
+          <a href="{% url 'signup' 'customer_signup' %}" class="link"
+            >Create an account?</a
+          >
+        </form>
+      </div>
+    </div>
+</div>
+<script>
+  const lat=document.querySelector('#latitude');
+  const long=document.querySelector('#longitude');
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+  function showPosition(position) {
+    latitude=position.coords.latitude;
+    longitude=position.coords.longitude;
+    lat.value=latitude;
+    long.value=longitude;
+    console.log(latitude+''+longitude);
+  }
+
+</script>
+{% endblock content %}

@@ -1,0 +1,212 @@
+{% extends 'base/base.html' %} {% load floor_tags %} {% load static %} {% load widget_tweaks %} {% block title %} {{ restaurant.name }} {% endblock title %} {% block content %}
+<div class="container-fluid bg-white pb-2">
+  <div class="container">
+    
+    <strong class="h2">{{ restaurant.name }}</strong>
+    <div class="row">
+      <div class="col-lg-2"><span class="">
+        <span>{% include 'rating/rating.html' with rating=restaurant.average_rating|floor %}</span></div>
+        <div class="col-lg-2"> <strong> {{ restaurant.number_of_reviews }} reviews </strong></div>
+      <div class="col-lg-8">
+        <svg viewBox="0 0 24 24" width="20px" height="20px" class="d Vb UmNoP">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M14.288 6.793L6.69 14.368l-.816 3.746 3.724-.839 7.588-7.583-2.9-2.9zm3.96 1.84l-2.898-2.9.556-.554A2.318 2.318 0 0117.52 4.5c.378 0 .73.104 1.031.315l.01.007.012.008c1.12.757 1.221 2.26.326 3.151l-.65.651zm-7.896 10.01l-5.99 1.35C4.34 20 4.319 20 4.298 20a.297.297 0 01-.29-.36l1.31-6.023 9.529-9.5A3.818 3.818 0 0117.52 3c.66 0 1.318.184 1.893.587a3.536 3.536 0 01.546 5.457l-9.607 9.599z"
+          ></path>
+        </svg>
+        <span
+          ><a href="#rate" class="link" style=""> Rate this Restaurant</a></span
+        >
+      </span>       
+      </div>
+  </div>
+    <span class="mb-2"
+      ><svg viewBox="0 0 24 24" width="20px" height="20px" class="d Vb icjEL">
+        <path
+          d="M12 2C7.745 2 4.27 5.475 4.27 9.73c0 4.539 4.539 9.056 6.971 11.486L12 22l.759-.761c2.433-2.453 6.972-6.97 6.972-11.509C19.73 5.475 16.256 2 12 2zm0 10.986c-1.93 0-3.5-1.569-3.5-3.5 0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 1.931-1.57 3.5-3.5 3.5z"
+        ></path>
+      </svg>
+      <span>{{ restaurant.location }} </span>
+      <span class="ms-4"
+        ><svg viewBox="0 0 24 24" width="20px" height="20px" class="d Vb icjEL">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 3.75a8.25 8.25 0 100 16.5 8.25 8.25 0 000-16.5zM2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm9-5.5h1.5v5.19l3.28 3.28-1.06 1.06-3.72-3.72V6.5z"
+          ></path>
+        </svg>
+        Opening Time: Mon-Sat: 11am-10pm, Sun: 12pm-9pm</span
+      >
+    </span>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+{% comment %}     
+    <strong class="h2">{{ restaurant.name }}</strong>
+    <div class="row">
+      <div class="col-lg-2"><span class="">
+        <span>{% include 'rating/rating.html' with rating=restaurant.average_rating|floor %}</span></div>
+        <div class="col-lg-2"> <strong> {{ restaurant.number_of_reviews }} reviews </strong></div>
+      <div class="col-lg-8">
+        <svg viewBox="0 0 24 24" width="20px" height="20px" class="d Vb UmNoP">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M14.288 6.793L6.69 14.368l-.816 3.746 3.724-.839 7.588-7.583-2.9-2.9zm3.96 1.84l-2.898-2.9.556-.554A2.318 2.318 0 0117.52 4.5c.378 0 .73.104 1.031.315l.01.007.012.008c1.12.757 1.221 2.26.326 3.151l-.65.651zm-7.896 10.01l-5.99 1.35C4.34 20 4.319 20 4.298 20a.297.297 0 01-.29-.36l1.31-6.023 9.529-9.5A3.818 3.818 0 0117.52 3c.66 0 1.318.184 1.893.587a3.536 3.536 0 01.546 5.457l-9.607 9.599z"
+          ></path>
+        </svg>
+        <span
+          ><a href="#rate" class="link" style=""> Rate this Restaurant</a></span
+        >
+      </span>       
+      </div>
+  </div>
+    <span class="mb-2"
+      ><svg viewBox="0 0 24 24" width="20px" height="20px" class="d Vb icjEL">
+        <path
+          d="M12 2C7.745 2 4.27 5.475 4.27 9.73c0 4.539 4.539 9.056 6.971 11.486L12 22l.759-.761c2.433-2.453 6.972-6.97 6.972-11.509C19.73 5.475 16.256 2 12 2zm0 10.986c-1.93 0-3.5-1.569-3.5-3.5 0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 1.931-1.57 3.5-3.5 3.5z"
+        ></path>
+      </svg>
+      <span>{{ restaurant.location }} </span>
+      <span class="ms-4"
+        ><svg viewBox="0 0 24 24" width="20px" height="20px" class="d Vb icjEL">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 3.75a8.25 8.25 0 100 16.5 8.25 8.25 0 000-16.5zM2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm9-5.5h1.5v5.19l3.28 3.28-1.06 1.06-3.72-3.72V6.5z"
+          ></path>
+        </svg>
+        Opening Time: Mon-Sat: 11am-10pm, Sun: 12pm-9pm</span
+      >
+    </span> {% endcomment %}
+    {% comment %}
+    <span class="mb-2"
+      ><svg viewBox="0 0 24 24" width="20px" height="20px" class="d Vb icjEL">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 3.75a8.25 8.25 0 100 16.5 8.25 8.25 0 000-16.5zM2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm9-5.5h1.5v5.19l3.28 3.28-1.06 1.06-3.72-3.72V6.5z"
+        ></path>
+      </svg>
+      Hours: Mon-Sat: 11am-10pm, Sun: 12pm-9pm
+    </span>
+    {% endcomment %}
+    
+    <div class="container mt-3">
+      <div class="row mb-2">
+        <div class="owl-carousel owl-theme">
+          {% for image in restaurant.image.all %}
+          <div class="item">
+            <img
+            src="{% static image.image_name %}"
+              class="img-fluid img-width"
+              alt="Restaurant image"
+            />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="row mt-3 bg-white pt-2 pb-4 border-light">
+        <div class="col-lg-6">
+          <h5 class="fw-bold"><i class="fa-solid fa-circle-info" style="color: #000000;"></i>  Details</h5>
+          <p><strong>Location:</strong> {{ restaurant.location }}</p>
+          <p>
+            <strong>Cuisines:</strong>
+            {% for cuisine in cuisines %}
+            <span>{{ cuisine.name }} </span>
+            {% endfor %}
+          </p>
+          <p>
+            <strong>Average ratings:</strong> {{ restaurant.average_rating }} {% include 'rating/rating.html' with rating=restaurant.average_rating|floor %}
+            
+          </p>
+          <p><strong>Hours:</strong> Mon-Sat: 11am-10pm, Sun: 12pm-9pm</p>
+          <a
+            href="{% url 'reservation' id user_id restaurant.slug %}"
+            class="reserve-btn"
+            >Make a Reservation</a
+          >
+        </div>
+        <div class="col-lg-6">
+          <h5 class="fw-bold"><i class="fa-solid fa-map-location-dot" style="color: #000000;"></i>  Map</h5>
+          <div id="display-google-map">
+            <iframe
+              frameborder="0"
+              src="https://www.google.com/maps/embed/v1/place?q={{ restaurant.latitude }}+{{ restaurant.longitude }}+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              class="map"
+            ></iframe>
+          </div>
+          <i
+            class="fa-regular fa-building mt-3 text-center"
+            style="color: #000000"
+          ></i
+          ><span class="ms-2">{{ distance }} km from your Location </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  
+
+  <div class="container bg-white border-light">
+    <div class="row">
+      <div class="h3 text-center mb-4">Ratings</div>
+    </div>
+    <div class="row">
+      <div id="form-result" class="text-success"></div>
+      <div class="row" id="rate">
+        <form action="" id="rating-form" method="post">
+          {% csrf_token %} {% render_field comment_form.restaurant class="form-control form-control-sm form-field" style="display:none" %}
+          {% csrf_token %} {% render_field comment_form.username class="form-control form-control-sm form-field" style="display:none" %}
+          <div class="col text-center">
+            <div class="label">Rate this Restaurant</div>
+            {% csrf_token %} {% render_field comment_form.rating class="form-control form-control-sm form-field" %}
+          </div>
+          <div class="col text-center">
+            <div class="label">Comment</div>
+            {% csrf_token %} {% render_field comment_form.body class="form-control form-control-sm form-field" %}
+          </div>
+          <button type="submit" id="rating-submit" class="btn btn-info mt-3">
+            Rate!
+          </button>
+        </form>
+      </div>
+    </div>
+    {% for comment in comment_rating %}
+    <div class="row">
+      <div class="card border-0">
+      
+      <div class="col-md-2 text-center">
+        <strong class="">{{ comment.username }}</strong>
+      </div>
+      <div class="col-md-2 text-center text-success">
+        {{ comment.rating }} stars
+        {% include 'rating/rating.html' with rating=comment.rating|floor %}
+        {{ comment.}}
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">{{ comment.body }}</div>
+        </div>
+      </div> 
+    </div>
+    </div>
+    {% endfor %} {% include 'restaurant_detail/pagination.html' with page=comment_rating %}
+  </div>
+  {% comment %}
+  <div class="row mt-4">
+    <div id="display-google-map">
+      <iframe
+        frameborder="0"
+        src="https://www.google.com/maps/embed/v1/place?q={{ restaurant.latitude }}+{{ restaurant.longitude }}+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+        class="map"
+      ></iframe>
+    </div>
+  </div>
+  {% endcomment %}
+</div>
+
+{% endblock content %}

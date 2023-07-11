@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<section class="mt-4">
+    <div class="container mt-4 signup-center">
+      <div class="row custom-signup">
+        <div class="h4 text-center mt-3">
+          {% comment %} {{ form.errors }} {{ form.non_field_error }} {% for message in messages %}
+          <li class="color-first">{{ message }}</li>
+          {% endfor %} Sign up {% endcomment %}
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6">
+              <label for="First Name" class=""> First Name:</label>
+               {% render_field form.first_name class="form-control form-control-sm" placeholder="Enter first name" %}
+            </div>
+            <div class="col-md-6">
+              <label for="First Name"> Last Name:</label>
+              {% render_field form.last_name class="form-control form-control-sm" placeholder="Enter last name" %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="First Name"> Email:</label>
+              {% render_field form.email class="form-control form-control-sm" placeholder="email@email.com" %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="First Name"> New Password:</label>
+              {% render_field form.password1 class="form-control form-control-sm" placeholder="Enter password" %}
+            </div>
+            <div class="col-md-6">
+              <label for="First Name"> Confirm Password:</label>
+              {% render_field form.password2 class="form-control form-control-sm" placeholder="Confirm password" %}
+            </div>
+          </div>
+          <div class="row mb-2 text-center">
+            <div class="col-md-12 mt-3">
+              <button class="reserve-btn">Update</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </section>
+
+{% endblock content %}

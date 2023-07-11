@@ -1,0 +1,90 @@
+{% extends 'base/base.html' %} {% load widget_tweaks%} {% load static %} {% block title %} Home {% endblock title %} {% block content %}
+{% comment %} <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> {% endcomment %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="hero">
+  <div class="row">
+  <form action="" method="get" class="search-bar">
+    {% render_field search_form.search_query class="search-input fs-6" placeholder="search...." %}
+          
+    {% comment %} <input type="text" placeholder="search..." class="search-input fs-6" />  {% endcomment %}
+    <button type="submit" class="search-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" class="d Vb UmNoP"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.74 3.75a5.99 5.99 0 100 11.98 5.99 5.99 0 000-11.98zM2.25 9.74a7.49 7.49 0 1113.3 4.728l5.44 5.442-1.06 1.06-5.44-5.439A7.49 7.49 0 012.25 9.74z"></path></svg></button>
+  </form>
+</div>
+</div>
+{% if user.is_authenticated %}
+<div class="container mb-3 mb-md-3">
+  
+  <div class="row text-center">
+    <div class="col-md">
+      <a href="{% url 'recommend' request.user.id zero %}" class="recommend-btn btn-block">Recommended Restaurants For You</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="container ">
+  <div class="row">
+    <span class="h3 mb-4">Restaurants</span>
+  </div>
+  <div class="row">
+    <div class="owl-carousel owl-theme">
+      {% for restaurant in restaurants %}
+      <div class="item">
+        <div class="card border-0 aftr">
+          {% for img in restaurant.image.all|slice:"0:1" %}
+
+          <a href="{% url 'detail' restaurant.slug restaurant.id %}"> <img
+            src="{% static img.image_name %}"
+            alt="{{ restaurant.name }}"
+            class="img-fluid img-width-home"
+          />
+        </a>
+          {% endfor %}
+          <div class="card-body bggray">
+            <div class="card-title">
+              <strong>
+              <a
+              href="{% url 'detail' restaurant.slug restaurant.id %}"
+              class="link"
+              >{{ restaurant.name }}</a
+            ></strong></div>
+            <div class="card-text"> 
+              <span> <strong class="strong">Average Rating:</strong> {{ restaurant.average_rating }}</span>
+              <span><strong class="strong">Reviews:</strong> {{ restaurant.number_of_reviews }}</span>
+              <p><strong>Cuisines:</strong>
+                {% for cuisines in restaurant.restaurant_cuisine.all|slice:"0:4" %} 
+                <span>{{ cuisines }}</span> 
+                {% endfor %}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

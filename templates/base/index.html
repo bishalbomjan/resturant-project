@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% block title %}Home Page{% endblock title %}
+{% block style %}
+body{
+    background-color: rgb(255, 255, 255);
+}
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+  
+  .restaurant-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 20px
+  }
+  
+  .restaurant-card img:hover {
+    opacity: 0.8;
+  }
+{% endblock style %}
+{% block container %}
+    {% include 'base/nav.html' %}
+    <div class="restaurant-grid">
+        {% for restaurant in restaurants %}
+          <div class="restaurant-card">
+            <h2>{{ restaurant.name }}</h2>
+            <p>{{ restaurant.location }}</p>
+            <a href="#"><img src="{{ restaurant.image_url.0 }}" alt="{{ restaurant.name }}"></a>
+            <p>Cuisine: {{ restaurant.cuisine|join:", " }}</p>
+            <p>Average rating: {{ restaurant.average_rating }}</p>
+            <p>Number of reviews: {{ restaurant.number_of_reviews }}</p>
+            
+          </div>
+        {% endfor %}
+      </div>
+    {% endblock container %}
